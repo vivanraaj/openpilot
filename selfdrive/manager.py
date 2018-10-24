@@ -101,7 +101,7 @@ managed_processes = {
   "sensord": ("selfdrive/sensord", ["./sensord"]),
   "gpsd": ("selfdrive/sensord", ["./gpsd"]),
   "orbd": ("selfdrive/orbd", ["./orbd_wrapper.sh"]),
-  "updated": "selfdrive.updated",
+  # "updated": "selfdrive.updated",
 }
 android_packages = ("ai.comma.plus.offroad", "ai.comma.plus.frame")
 
