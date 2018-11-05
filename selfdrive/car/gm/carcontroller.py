@@ -28,7 +28,7 @@ class CarControllerParams():
 
     # Takes case of "Service Adaptive Cruise" and "Service Front Camera"
     # dashboard messages.
-    self.ADAS_KEEPALIVE_STEP = 100
+    self.ADAS_KEEPALIVE_STEP = 2
     self.CAMERA_KEEPALIVE_STEP = 100
 
     # pedal lookups, only for Volt
