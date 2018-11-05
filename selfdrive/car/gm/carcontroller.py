@@ -94,7 +94,9 @@ class CarController(object):
     ### STEER ###
 
     if (frame % P.STEER_STEP) == 0:
-      lkas_enabled = enabled and not CS.steer_not_allowed and CS.v_ego > 3.
+      # DO NOT MERGE, 2019 Volt experiments
+      # lkas_enabled = enabled and not CS.steer_not_allowed and CS.v_ego > 3.
+      lkas_enabled = enabled
       if lkas_enabled:
         apply_steer = actuators.steer * P.STEER_MAX
         apply_steer = apply_std_steer_torque_limits(apply_steer, self.apply_steer_last, CS.steer_torque_driver, P)
