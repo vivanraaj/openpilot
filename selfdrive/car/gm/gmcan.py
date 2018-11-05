@@ -144,6 +144,19 @@ def create_lka_icon_command(bus, active, critical):
     dat = "\x00\x00\x00"
   return [0x104c006c, 0, dat, bus]
 
+def create_2cd(bus, idx):
+  dat = chr(idx << 5) + "\x2c\x03\xd3" + chr(0xfd - idx) + "\x00\x00\x00"
+  return [0x2cd, 0, dat, bus]
+
+def create_365(bus):
+  return [0x365, 0, "\x80\x22\x30\xe0\x00\x00\x00\x00", bus]
+
+def create_510(bus):
+  return [0x510, 0, "\x00\x00\x00\x00\x00\x00\x00\x00", bus]
+
+def create_78a(bus):
+  return [0x78a, 0, "\x00\x6c\x00\x00\x00\x00\x00\x00", bus]
+
 # TODO: WIP
 '''
 def create_friction_brake_command_ct6(packer, bus, apply_brake, idx, near_stop, at_full_stop):

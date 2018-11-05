@@ -164,6 +164,19 @@ class CarController(object):
       if frame % P.ADAS_KEEPALIVE_STEP == 0:
         can_sends += gmcan.create_adas_keepalive(canbus.powertrain)
 
+      # Volt 2019:
+      # Every 40ms
+      if frame % 4 == 0:
+        idx = (frame / 4) % 4
+        can_sends += gmcan.create_2cd(canbus.powertrain, idx)
+        can_sends += gmcan.create_365(canbus.powertrain)
+      # Every 10ms
+      if frame % 10 == 0:
+        can_sends += gmcan.create_510(canbus.powertrain)
+      # Every second
+      if frame % 100 == 0:
+        can_sends += gmcan.create_78a(canbus.powertrain)
+
     # Show green icon when LKA torque is applied, and
     # alarming orange icon when approaching torque limit.
     # If not sent again, LKA icon disappears in about 5 seconds.
