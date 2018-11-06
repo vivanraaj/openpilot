@@ -170,14 +170,14 @@ class CarController(object):
       # Every 40ms
       if frame % 4 == 0:
         idx = (frame / 4) % 4
-        can_sends += gmcan.create_2cd(canbus.powertrain, idx)
-        can_sends += gmcan.create_365(canbus.powertrain)
+        can_sends.append(gmcan.create_2cd(canbus.powertrain, idx))
+        can_sends.append(gmcan.create_365(canbus.powertrain))
       # Every 10ms
       if frame % 10 == 0:
-        can_sends += gmcan.create_510(canbus.powertrain)
+        can_sends.append(gmcan.create_510(canbus.powertrain))
       # Every second
       if frame % 100 == 0:
-        can_sends += gmcan.create_78a(canbus.powertrain)
+        can_sends.append(gmcan.create_78a(canbus.powertrain))
 
     # Show green icon when LKA torque is applied, and
     # alarming orange icon when approaching torque limit.
