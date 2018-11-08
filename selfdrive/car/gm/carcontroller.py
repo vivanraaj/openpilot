@@ -172,7 +172,12 @@ class CarController(object):
       if frame % 4 == 0:
         idx = (frame / 4) % 4
         can_sends.append(gmcan.create_2cd(canbus.powertrain, idx))
-        can_sends.append(gmcan.create_365(canbus.powertrain))
+        can_sends.append(gmcan.create_365_pt(canbus.powertrain))
+
+        can_sends.append(gmcan.create_320(canbus.chassis, idx))
+        can_sends.append(gmcan.create_321(canbus.chassis, idx))
+        can_sends.append(gmcan.create_325(canbus.chassis, idx))
+        can_sends.append(gmcan.create_365_ch(canbus.chassis))
       # Every 10ms
       if frame % 10 == 0:
         can_sends.append(gmcan.create_510(canbus.powertrain))

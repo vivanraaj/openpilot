@@ -148,8 +148,26 @@ def create_2cd(bus, idx):
   dat = chr(idx << 5) + "\x2c\x03\xd3" + chr(0xfd - idx) + "\x00\x00\x00"
   return [0x2cd, 0, dat, bus]
 
-def create_365(bus):
+def create_320(bus, idx):
+  checksum = (0x10000 - idx) & 0xffff
+  checksum_str = chr(checksum >> 8) + chr(checksum & 0xff)
+  return [0x320, 0, chr(idx << 5) + "\x00\x00\x00" + checksum_str + "\x00\x00", bus]
+
+def create_321(bus, idx):
+  checksum = 0xf000 - idx
+  checksum_str = chr(checksum >> 8) + chr(checksum & 0xff)
+  return [0x321, 0, "\x10\x00" + checksum_str + chr(idx) + "\x00\x00\x00", bus]
+
+def create_325(bus, idx):
+  checksum = (0x20000 - idx) & 0x1ffff
+  checksum_str = chr(checksum >> 16) + chr((checksum >> 8) & 0xff) + chr(checksum & 0xff)
+  return [0x325, 0, "\x00\x00" + chr(idx << 6) + "\x00\x00" + checksum_str, bus]
+
+def create_365_pt(bus):
   return [0x365, 0, "\x80\x22\x30\xe0\x00\x00\x00\x00", bus]
+
+def create_365_ch(bus):
+  return [0x365, 0, "\x86\x00\x0f\xff\x00\x00\x00\x00", bus]
 
 def create_510(bus):
   return [0x510, 0, "\x00\x00\x00\x00\x00\x00\x00\x00", bus]
